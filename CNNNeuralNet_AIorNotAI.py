@@ -65,7 +65,7 @@ criterion = nn.BCELoss()
 optimizer = optim.AdamW(model.parameters(), lr=0.001)
 
 # Train function
-def train_model(model, train_loader, criterion, optimizer, num_epochs=5):
+def train_model(model, train_loader, criterion, optimizer, num_epochs=10):
     model.train()
     for epoch in range(num_epochs):
         correct, total, running_loss = 0, 0, 0.0
@@ -98,7 +98,7 @@ def validate_model(model, val_loader, criterion):
     print(f"Validation Loss: {running_loss:.4f}, Accuracy: {accuracy:.2f}%")
 
 # Train and validate the model
-train_model(model, train_loader, criterion, optimizer, num_epochs=5)
+train_model(model, train_loader, criterion, optimizer, num_epochs=10)
 validate_model(model, val_loader, criterion)
 
 # Predict a single image
@@ -109,6 +109,11 @@ def predict_image(model, image_path):
     with torch.no_grad():
         output = model(image_tensor).item()
         prediction = "AI Generated" if output >= 0.5 else "Real Art"
+    plt.imshow(Image.open(image_path))
+    plt.axis('off')  # Turn off axes for better visualization
+    plt.title(f"Prediction: {prediction}")
+    plt.show()
+    print(f"This is a {prediction}.")
     return prediction
 
 # Predict a folder of images
@@ -119,7 +124,7 @@ def predict_folder(model, folder_path):
             file_path = os.path.join(folder_path, filename)
             prediction = predict_image(model, file_path)
             predictions[filename] = prediction
-            print(f"{filename}: {prediction}")
+            print(f"Filename: {filename}:" f"This is a {prediction}")
     return predictions
 
 # Test predictions

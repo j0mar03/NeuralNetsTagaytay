@@ -45,7 +45,7 @@ transform = transforms.Compose([
 ])
 
 # Define the path to your dataset
-train_path = r'D:\neuralNets\Repository\ECDS-NeuralNets\Day 3\Datasets\Pizza Classification'
+train_path = r'D:\neuralNets\Repository\ECDS-NeuralNets\Day 3\Datasets\pizza_not_pizza'
 
 # Load the full dataset using ImageFolder
 full_dataset = datasets.ImageFolder(train_path, transform=transform)
@@ -227,7 +227,7 @@ def predict_folder(model, folder_path):
 
 
 # Load a folder of test images and predict
-test_path = r'D:\neuralNets\Repository\ECDS-NeuralNets\Day 3\Datasets\Pizza Classification\Test'
+test_path = r'D:\neuralNets\Repository\ECDS-NeuralNets\Day 3\Datasets\PizzaTest'
 predictions = predict_folder(model, test_path)
 
 # Print detailed predictions
